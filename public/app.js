@@ -1,11 +1,12 @@
 import { revisionNote } from './revision-note.js';
 const $ = id => document.getElementById(id);
-let examples = [], quantities = {}, result = null, analyzedInput = null, busy = false;
+let selectedImage = null, imagePreviewUrl = null, transcriptionInfo = null;
+let examples = [], quantities = {}, result = null, analyzedInput = null, busy = false, activeProvider = null;
 const text = (id, value) => { $(id).textContent = value; };
 const visible = (id, show) => { $(id).hidden = !show; };
 const stepCount = () => { const code = $('subject').value === 'programming'; const lines = $('attempt').value.split(/\r?\n/); text('step-count', `${code ? ($('attempt').value ? lines.length : 0) : lines.filter(s => s.trim()).length} ${code ? 'lines' : 'steps'}`); };
 async function request(path, data) {
-  const response = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data), signal: AbortSignal.timeout(195000) });
+  const response = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...data, expectedProvider: activeProvider }), signal: AbortSignal.timeout(195000) });
   const body = await response.json();
   if (!response.ok) throw new Error(body.error || 'The request could not be completed. Please retry.');
   return body;
@@ -14,7 +15,7 @@ function showError(error) { text('error', error.name === 'TimeoutError' ? 'The r
 function subjectChanged() {
   const maths = $('subject').value === 'mathematics', code = $('subject').value === 'programming';
   visible('physics-data', !maths && !code); visible('maths-data', maths); visible('code-data', code);
-  document.querySelector('.data-panel').hidden = code;
+  $('independent-data').hidden = code;
   text('question-label', code ? 'What should this code do?' : 'The question'); text('attempt-label', code ? 'Your code · preserve indentation' : 'Your worked solution');
   $('attempt').placeholder = code ? 'def total(numbers):\n    result = 0\n    for i in range(len(numbers) + 1):\n        result += numbers[i]\n    return result' : 'Write one reasoning step per line.';
   $('question').placeholder = code ? 'Describe the expected behavior, inputs, and what you want to learn.' : maths ? 'Solve 2*x + 3 = 11. Show each step.' : 'A cart starts from rest and accelerates at 2 m/s² for 5 s. Find its final velocity.';
@@ -30,7 +31,7 @@ function renderExamples() {
       $('language').value = example.language ?? 'Python'; $('error-message').value = example.errorMessage ?? '';
       $('scenario').value = example.scenario ?? 'general'; $('reference-equation').value = example.referenceEquation ?? '';
       for (const key of Object.keys(quantities)) $('given-' + key).value = example.givens?.[key] ?? '';
-      stepCount(); clearResult(); $('attempt').focus();
+      transcriptionInfo = null; visible('transcript-review', false); stepCount(); clearResult(); $('attempt').focus();
     });
     $('example-buttons').append(button);
   }
@@ -39,7 +40,7 @@ function clearResult() { result = null; visible('results', false); visible('erro
 function getInput() {
   const givens = {};
   if ($('subject').value === 'physics') for (const key of Object.keys(quantities)) { const value = $('given-' + key).value; if (value.trim() !== '') givens[key] = Number(value); }
-  return { language: $('language').value, errorMessage: $('subject').value === 'programming' ? $('error-message').value : '', subject: $('subject').value, question: $('question').value, attempt: $('attempt').value, scenario: $('subject').value === 'physics' ? $('scenario').value : 'general', givens, referenceEquation: $('subject').value === 'mathematics' ? $('reference-equation').value : '' };
+  return { transcriptionSource: transcriptionInfo ? { ...transcriptionInfo, confirmedByUser: $('confirm-transcript').checked } : null, language: $('language').value, errorMessage: $('subject').value === 'programming' ? $('error-message').value : '', subject: $('subject').value, question: $('question').value, attempt: $('attempt').value, scenario: $('subject').value === 'physics' ? $('scenario').value : 'general', givens, referenceEquation: $('subject').value === 'mathematics' ? $('reference-equation').value : '' };
 }
 function renderResult(data) {
   result = data;
@@ -76,6 +77,7 @@ function renderResult(data) {
 }
 $('analyze-form').addEventListener('submit', async event => {
   event.preventDefault(); if (busy) return;
+  if (transcriptionInfo && !$('confirm-transcript').checked) { showError(new Error('Check the extracted text against the image, edit anything misread, then confirm the transcription.')); return; }
   const input = getInput(); busy = true; result = null;
   $('analyze-button').disabled = true; $('subject').disabled = true;
   text('analyze-button', 'Looking for the first wrong turn…');
@@ -100,7 +102,7 @@ $('export-button').addEventListener('click', () => {
 try {
   const [healthResponse, examplesResponse] = await Promise.all([fetch('/api/health'), fetch('/examples.json')]);
   if (!healthResponse.ok || !examplesResponse.ok) throw new Error('Could not load Margin. Refresh the page.');
-  const health = await healthResponse.json(); examples = await examplesResponse.json(); quantities = health.quantities;
+  const health = await healthResponse.json(); activeProvider = health.provider ?? 'google'; examples = await examplesResponse.json(); quantities = health.quantities;
   text('connection', health.offline ? 'Local Gemma · not checked' : health.configured ? 'Key saved · connection not checked' : 'Gemma key needed');
   if (health.offline) text('privacy-copy', 'Offline mode: work is sent only to Ollama on this computer. No Google API request or cloud fallback is used.');
   for (const [key, info] of Object.entries(quantities)) {
@@ -111,3 +113,27 @@ try {
   }
   subjectChanged();
 } catch (e) { showError(e); }
+
+$('image-input').addEventListener('change', () => {
+  const file = $('image-input').files[0]; selectedImage = null; transcriptionInfo = null; visible('transcript-review', false); $('read-image').disabled = true;
+  if (imagePreviewUrl) URL.revokeObjectURL(imagePreviewUrl);
+  visible('image-preview', false); text('image-status', '');
+  if (!file) return;
+  if (!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size > 2097152) { showError(new Error('Use a PNG, JPEG or WebP image no larger than 2 MB.')); return; }
+  selectedImage = file; imagePreviewUrl = URL.createObjectURL(file); $('image-preview').src = imagePreviewUrl; visible('image-preview', true); $('read-image').disabled = false;
+});
+$('read-image').addEventListener('click', async () => {
+  if (!selectedImage || busy) return;
+  if (($('question').value.trim() || $('attempt').value.trim()) && !window.confirm('Replace the current question and work with the image transcription?')) return;
+  busy = true; $('read-image').disabled = true; $('analyze-button').disabled = true; $('subject').disabled = true; visible('error', false); text('image-status', 'Gemma is reading your image…');
+  try {
+    const dataUrl = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error('Could not read this image.')); reader.readAsDataURL(selectedImage); });
+    const data = await request('/api/transcribe', { subject: $('subject').value, language: $('language').value, image: { mimeType: selectedImage.type, data: dataUrl.split(',')[1] } });
+    $('question').value = data.transcription.question; $('attempt').value = data.transcription.attempt; $('scenario').value = 'general'; $('reference-equation').value = ''; for (const k of Object.keys(quantities)) $('given-' + k).value = '';
+    transcriptionInfo = { type: 'image', model: data.inference.model, provider: data.inference.provider, uncertainty: data.transcription.uncertainty };
+    clearResult(); stepCount(); $('confirm-transcript').checked = false; visible('transcript-review', true);
+    text('transcript-warning', 'Review required: ' + data.transcription.uncertainty + ' Exact-step feedback will refer to your reviewed text, not directly to image pixels.');
+    text('image-status', 'Image read with real ' + data.inference.model + '. Review and confirm the extracted text, then debug.');
+  } catch (e) { showError(e); text('image-status', 'Image transcription failed. You can retry or enter text manually.'); }
+  finally { busy = false; $('read-image').disabled = false; $('analyze-button').disabled = false; $('subject').disabled = false; }
+});

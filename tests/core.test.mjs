@@ -139,3 +139,13 @@ test('revision note safely fences student code containing Markdown fences and HT
   const data = { feedback: feedback(), status: 'incorrect', verification: subjects.physics.verify(input), inference: { modelVersion: 'Gemma 4', provider: 'test' } };
   assert.ok(revisionNote(codeInput, data).includes('````text\n```\n<script>'));
 });
+
+const { validateImage, validateTranscription } = await import('../lib/vision.mjs');
+test('multimodal input rejects invalid types, fake signatures and oversized images', () => {
+  for (const image of [{ mimeType: 'image/svg+xml', data: 'aGVsbG8=' }, { mimeType: 'image/png', data: Buffer.from('not a real PNG signature at all').toString('base64') }, { mimeType: 'image/png', data: 'a'.repeat(2796205) }]) assert.throws(() => validateImage({ subject: 'physics', image }));
+});
+test('image transcription preserves bugs and indentation and permits missing question context', () => {
+  const t = validateTranscription({ question: '', attempt: 'def f(xs):\n    return xs[9]', uncertainty: 'The expected behavior was not in the screenshot.' });
+  assert.equal(t.attempt, 'def f(xs):\n    return xs[9]');
+  assert.throws(() => validateTranscription({ question: '', attempt: '', uncertainty: 'Blank image' }));
+});

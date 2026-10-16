@@ -43,6 +43,10 @@ Then run `node server.mjs`. No Gemini key is required in local mode. All inferen
 
 The E2B download is roughly 4.6 GB (size may change) and requires additional RAM for runtime/context. Latency and accuracy differ from the hosted 26B model. Adapter tests are not proof of local model performance: see the verification report for whether local Gemma inference was actually tested on this machine. The API-specific age/data terms apply to hosted mode; downloaded weights have their separate Apache 2.0 license.
 
+## Multimodal input: photos and screenshots
+
+Upload a PNG, JPEG or WebP image (maximum 2 MB). Gemma 4 reads the question and the student’s own work/code without correcting it. The extracted question and steps remain editable, and you must confirm the transcription against the image before diagnosis. This makes exact quotes refer to reviewed text rather than claiming error-free handwriting recognition. Both the Google and local Ollama adapters send the actual image to Gemma 4; local mode uses no external inference endpoint. Diagrams and unclear handwriting can be misread, so correct any omitted information before continuing. Images are not stored by Margin; hosted images follow Google’s API data terms.
+
 ## Supported scope
 
 | Subject | Gemma feedback | Independent checks |
