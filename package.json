@@ -1,0 +1,6 @@
+{
+  "name": "margin-learning-debugger", "version": "1.0.0", "private": true,
+  "description": "Find where your reasoning or code went off track, with Gemma 4 and independent checks.",
+  "type": "module", "license": "MIT", "engines": {"node": ">=22"},
+  "scripts": {"start": "node server.mjs", "dev": "node --watch server.mjs", "test": "node --test", "eval:live": "node scripts/evaluate.mjs"}
+}

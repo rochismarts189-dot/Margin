@@ -1,0 +1,418 @@
+{
+  "timestamp": "2026-10-16T06:03:35.935Z",
+  "model": "gemma-4-26b-a4b-it",
+  "realInference": true,
+  "cases": [
+    {
+      "id": "ambiguous",
+      "passed": false,
+      "error": "Could not reach Gemma within 90 seconds. Check your connection and retry.",
+      "code": "PROVIDER_UNREACHABLE"
+    },
+    {
+      "id": "maths-ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student correctly manipulated the equation to isolate x, but failed to provide a numerical value as requested because the value of 'a' is unknown.",
+          "firstIssue": null,
+          "hints": [
+            "Review the question to see if a specific numerical value for 'a' was provided or if the problem can be solved numerically without it.",
+            "Consider what information is missing to transform the expression '7 - a' into a single number."
+          ],
+          "correction": "The steps correctly isolate x as '7 - a', but since 'a' is an unspecified constant, a single numerical value for x cannot be determined. To complete the solution, a value for 'a' must be provided.",
+          "followUp": {
+            "question": "If x + a = 7 and a = 3, what is the numerical value of x?",
+            "answer": "4",
+            "explanation": "Substitute a = 3 into the equation: x + 3 = 7. Subtract 3 from both sides to get x = 4."
+          },
+          "uncertainty": "The problem is underspecified as 'a' is not defined, making a numerical solution impossible."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "x + a = 7",
+              "status": "unverified",
+              "detail": "Needs a confirmed linear reference equation in x, or explicit numeric arithmetic."
+            },
+            {
+              "step": 2,
+              "quote": "x = 7 - a",
+              "status": "unverified",
+              "detail": "Needs a confirmed linear reference equation in x, or explicit numeric arithmetic."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 7252,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 3,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The function attempts to access an index that is beyond the bounds of the list due to an off-by-one error in the range calculation.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "    for i in range(len(numbers) + 1):",
+            "misconception": "The student likely believes that the `range` function includes the stop value, or that the length of a list corresponds to the highest valid index."
+          },
+          "hints": [
+            "Recall how Python's `range(stop)` function behaves regarding the inclusion of the 'stop' value.",
+            "Try tracing the loop with a list of length 2: what are the values of `i` produced by `range(len(numbers) + 1)`?"
+          ],
+          "correction": "for i in range(len(numbers)):",
+          "followUp": {
+            "question": "How would you rewrite this function using a more 'Pythonic' way that iterates directly over the elements instead of using indices?",
+            "answer": "for num in numbers:\n    result += num",
+            "explanation": "In Python, it is generally preferred to iterate over the items in a collection directly rather than managing an index variable manually."
+          },
+          "uncertainty": "None. The error is a deterministic IndexError caused by the range bounds."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "def total(numbers):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "    result = 0",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "    for i in range(len(numbers) + 1):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 4,
+              "quote": "        result += numbers[i]",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 5,
+              "quote": "    return result",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Python code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 8040,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-correct",
+      "expectedStatus": "correct",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The function correctly implements the summation logic, including the edge case for an empty list.",
+          "firstIssue": null,
+          "hints": [
+            "Consider how the loop behaves if the input list contains no elements.",
+            "Verify that the initial value of 'result' is the additive identity."
+          ],
+          "correction": "The code is correct as written. It initializes the accumulator to 0, iterates through all elements, and returns 0 if the loop never executes.",
+          "followUp": {
+            "question": "How would you modify this function to return the product of a list of numbers, ensuring it returns 1 for an empty list?",
+            "answer": "def product(numbers):\n    result = 1\n    for value in numbers:\n        result *= value\n    return result",
+            "explanation": "To calculate a product, the accumulator must be initialized to the multiplicative identity (1) instead of the additive identity (0)."
+          },
+          "uncertainty": "Static model review only; no runtime execution performed."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "def total(numbers):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "    result = 0",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "    for value in numbers:",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 4,
+              "quote": "        result += value",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 5,
+              "quote": "    return result",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Python code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 6427,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student has provided the function signature and a comment, but the logic for finding the maximum value has not yet been implemented.",
+          "firstIssue": null,
+          "hints": [
+            "Think about how you might keep track of the largest number seen so far as you look through the list one by one.",
+            "Consider initializing a variable with the first element of the list and then using a loop to compare it against the rest."
+          ],
+          "correction": "Implement the logic using a loop: \n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
+          "followUp": {
+            "question": "How would you modify your function to return the index of the largest value instead of the value itself?",
+            "answer": "Use enumerate() to track the index during the loop.",
+            "explanation": "To find the position of an element, you need to track the current index while iterating, which is most efficiently done with the enumerate() function in Python."
+          },
+          "uncertainty": "The code is marked as incomplete because the student explicitly stated they have 'only started implementing it' and used a 'pass' statement."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "def maximum(numbers):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "    # TODO: compare the elements and return the largest",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "    pass",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Python code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 7690,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The code attempts to call a function named `transform` which has not been defined or provided in the context, making the logic impossible to evaluate.",
+          "firstIssue": null,
+          "hints": [
+            "Consider the dependency requirements of a function: what must exist in the scope for a function call to succeed?",
+            "Try to trace the execution flow: if you were to run `process(5)`, where would the computer look for the definition of `transform`?"
+          ],
+          "correction": "Define the `transform` function before calling it within `process`, or pass it as a callback argument.",
+          "followUp": {
+            "question": "How would you modify the `process` function signature so that the user can decide which transformation to apply at runtime?",
+            "answer": "function process(value, transform) { return transform(value); }",
+            "explanation": "By adding `transform` as a second parameter, the function becomes a higher-order function that accepts a transformation logic as an argument."
+          },
+          "uncertainty": "The intended behavior of `transform` is unknown, so the correctness of the logic cannot be determined."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "function process(value) {",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "  return transform(value);",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "}",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "JavaScript code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 6998,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-js-incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 2,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The function uses the addition operator on inputs that are strings, causing JavaScript to perform string concatenation instead of numeric addition.",
+          "firstIssue": {
+            "step": 2,
+            "quote": "  return a + b;",
+            "misconception": "The student assumes the '+' operator will automatically coerce string inputs into numbers for arithmetic, whereas in JavaScript, '+' acts as a concatenation operator when one or both operands are strings."
+          },
+          "hints": [
+            "Recall how JavaScript handles the '+' operator when it encounters string types versus number types.",
+            "Try using a built-in function to explicitly convert the inputs 'a' and 'b' into numbers before performing the addition."
+          ],
+          "correction": "return Number(a) + Number(b);",
+          "followUp": {
+            "question": "What would happen if you called `add(2, \"3\")` with your current code, and how does that differ from `add(\"2\", \"3\")`?",
+            "answer": "add(2, \"3\") would return \"23\".",
+            "explanation": "In JavaScript, if either operand of the '+' operator is a string, the other operand is coerced into a string and the two are concatenated. Even if one is a number, the presence of one string triggers concatenation."
+          },
+          "uncertainty": "Static model review only; code was not executed."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "function add(a, b) {",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "  return a + b;",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "}",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "JavaScript code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 8127,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    }
+  ]
+}

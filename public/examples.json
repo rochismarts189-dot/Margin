@@ -1,0 +1,158 @@
+[
+  {
+    "id": "incorrect",
+    "label": "Wrong turn",
+    "question": "A cart starts from rest and moves with constant acceleration 2 m/s\u00b2 for 5 s. Find its final velocity.",
+    "attempt": "u = 0 m/s\na = 2 m/s\u00b2\nt = 5 s\nv = u + a/t\nv = 0 + 2/5\nv = 0.4 m/s",
+    "scenario": "motion",
+    "givens": {
+      "u": 0,
+      "a": 2,
+      "t": 5
+    }
+  },
+  {
+    "id": "correct",
+    "label": "Correct solution",
+    "question": "A cart starts from rest and moves with constant acceleration 2 m/s\u00b2 for 5 s. Find its final velocity.",
+    "attempt": "u = 0 m/s\na = 2 m/s\u00b2\nt = 5 s\nv = u + a*t\nv = 0 + 2*5\nv = 10 m/s",
+    "scenario": "motion",
+    "givens": {
+      "u": 0,
+      "a": 2,
+      "t": 5
+    }
+  },
+  {
+    "id": "incomplete",
+    "label": "Unfinished work",
+    "question": "A 3 kg object accelerates at 4 m/s\u00b2 in an inertial frame. Find the net force on it.",
+    "attempt": "m = 3 kg\na = 4 m/s\u00b2\nF = m*a\nI have not substituted the numbers or found the final force yet.",
+    "scenario": "force",
+    "givens": {
+      "m": 3,
+      "a": 4
+    }
+  },
+  {
+    "id": "ambiguous",
+    "label": "Missing information",
+    "question": "A 2 kg box is pushed with a force of 10 N across a rough horizontal floor. Find its acceleration. The frictional force is not given.",
+    "attempt": "m = 2 kg\nApplied force = 10 N\nF_net = 10 N - friction\na = F_net/m\nI need the frictional force to find a numerical acceleration.",
+    "scenario": "general",
+    "givens": {
+      "m": 2
+    }
+  },
+  {
+    "id": "energy",
+    "label": "Energy misconception",
+    "question": "Find the classical kinetic energy of a 2 kg object moving at a speed of 3 m/s.",
+    "attempt": "m = 2 kg\nv = 3 m/s\nKE = 0.5*m*v\nKE = 3 J",
+    "scenario": "energy",
+    "givens": {
+      "m": 2,
+      "v": 3
+    }
+  },
+  {
+    "id": "work",
+    "label": "Work & arithmetic",
+    "question": "A constant 6 N force acts parallel to a displacement of 4 m. Calculate the work done by this force.",
+    "attempt": "F = 6 N\ns = 4 m\nW = F*s\nW = 6*4 = 20 J",
+    "scenario": "work",
+    "givens": {
+      "F": 6,
+      "s": 4
+    }
+  },
+  {
+    "id": "maths-incorrect",
+    "subject": "mathematics",
+    "label": "Wrong division",
+    "question": "Solve 2*x + 3 = 11 for x. Show your working.",
+    "attempt": "2*x + 3 = 11\n2*x = 8\nx = 8",
+    "referenceEquation": "2*x + 3 = 11",
+    "scenario": "general",
+    "givens": {}
+  },
+  {
+    "id": "maths-correct",
+    "subject": "mathematics",
+    "label": "Correct algebra",
+    "question": "Solve 2*x + 3 = 11 for x. Show your working.",
+    "attempt": "2*x + 3 = 11\n2*x = 8\nx = 4",
+    "referenceEquation": "2*x + 3 = 11",
+    "scenario": "general",
+    "givens": {}
+  },
+  {
+    "id": "maths-incomplete",
+    "subject": "mathematics",
+    "label": "Unfinished algebra",
+    "question": "Solve 2*x + 3 = 11 for x. Show your working.",
+    "attempt": "2*x + 3 = 11\n2*x = 8",
+    "referenceEquation": "2*x + 3 = 11",
+    "scenario": "general",
+    "givens": {}
+  },
+  {
+    "id": "maths-ambiguous",
+    "subject": "mathematics",
+    "label": "Missing value",
+    "question": "Find a numerical value of x from x + a = 7. The value of a is not specified.",
+    "attempt": "x + a = 7\nx = 7 - a",
+    "referenceEquation": "",
+    "scenario": "general",
+    "givens": {}
+  },
+  {
+    "id": "code-incorrect",
+    "subject": "programming",
+    "language": "Python",
+    "label": "Python off-by-one",
+    "question": "This function should return the sum of a list of numbers, including returning 0 for an empty list. Why does it crash?",
+    "attempt": "def total(numbers):\n    result = 0\n    for i in range(len(numbers) + 1):\n        result += numbers[i]\n    return result",
+    "errorMessage": "total([2, 3]) raises IndexError: list index out of range",
+    "expectedStatus": "incorrect",
+    "expectedStep": 3
+  },
+  {
+    "id": "code-correct",
+    "subject": "programming",
+    "language": "Python",
+    "label": "Correct Python",
+    "question": "This function should return the sum of a list of numbers, including returning 0 for an empty list. Review it.",
+    "attempt": "def total(numbers):\n    result = 0\n    for value in numbers:\n        result += value\n    return result",
+    "expectedStatus": "correct"
+  },
+  {
+    "id": "code-incomplete",
+    "subject": "programming",
+    "language": "Python",
+    "label": "Unfinished function",
+    "question": "Write a function that returns the largest value in a nonempty list of numbers. I have only started implementing it.",
+    "attempt": "def maximum(numbers):\n    # TODO: compare the elements and return the largest\n    pass",
+    "expectedStatus": "incomplete"
+  },
+  {
+    "id": "code-ambiguous",
+    "subject": "programming",
+    "language": "JavaScript",
+    "label": "Missing code context",
+    "question": "This function returns a value, but I have not specified what transform should do or which output is expected. Can you diagnose it?",
+    "attempt": "function process(value) {\n  return transform(value);\n}",
+    "expectedStatus": "ambiguous"
+  },
+  {
+    "id": "code-js-incorrect",
+    "subject": "programming",
+    "language": "JavaScript",
+    "label": "JavaScript type bug",
+    "question": "This function should add two numeric inputs. add(\"2\", \"3\") should return the number 5, but returns the string \"23\". Where did I go wrong?",
+    "attempt": "function add(a, b) {\n  return a + b;\n}",
+    "errorMessage": "Observed add(\"2\", \"3\") => \"23\", expected 5",
+    "expectedStatus": "incorrect",
+    "expectedStep": 2
+  }
+]
