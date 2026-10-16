@@ -1,0 +1,14 @@
+{
+  "transcription": {
+    "question": "A cart starts from rest and accelerates uniformly at 2 m/s^2 for 5 s.\nFind its final velocity.",
+    "attempt": "u = 0 m/s\na = 2 m/s^2\nt = 5 s\nv = u + a/t\nv = 0.4 m/s",
+    "uncertainty": "Gemma reported no specific ambiguity. This is not proof of accurate transcription; check every line against the image."
+  },
+  "inference": {
+    "model": "gemma-4-26b-a4b-it",
+    "provider": "Google Gemini API",
+    "offline": false,
+    "realInference": true
+  },
+  "reviewRequired": true
+}

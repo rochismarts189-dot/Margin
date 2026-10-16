@@ -17,6 +17,6 @@ for (const example of examples.filter(e => !selected.length || selected.includes
     console.log(`${passed ? 'PASS' : 'FAIL'} ${example.id}: ${result.status}, issue ${result.feedback.firstIssue?.step ?? 'none'}, ${result.inference.milliseconds}ms`);
   } catch (e) { report.cases.push({ id: example.id, passed: false, error: e.message, code: e.code }); console.log(`FAIL ${example.id}: ${e.message}`); }
 }
-await writeFile(new URL(selected.length ? '../docs/live-evaluation-targeted.json' : '../docs/live-evaluation.json', import.meta.url), JSON.stringify(report, null, 2) + '\n');
+await writeFile(new URL(configuration().provider === 'ollama' ? (selected.length ? '../docs/local-evaluation-targeted.json' : '../docs/local-evaluation.json') : (selected.length ? '../docs/live-evaluation-targeted.json' : '../docs/live-evaluation.json'), import.meta.url), JSON.stringify(report, null, 2) + '\n');
 console.log(`${report.cases.filter(c => c.passed).length}/${report.cases.length} live examples passed.`);
 if (!report.cases.length || report.cases.some(c => !c.passed)) process.exitCode = 1;

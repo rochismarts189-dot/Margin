@@ -16,7 +16,7 @@ The MVP supports introductory engineering Physics and Maths (arithmetic and line
 
 **Demo:** Local http://127.0.0.1:3000; accessible only on the demo laptop. Follow the README to reproduce.
 
-**Validation:** 35 automated checks passed. All 15 hosted smoke-test examples passed across a full run and a targeted retry; the full run had one provider service error. See the verification report for details. Offline inference verification is in progress.
+**Validation:** 37 automated checks passed. All 15 hosted smoke-test examples passed across a full run and a targeted retry; the full run had one provider service error. See the verification report for details. Hosted image transcription was also checked with a real synthetic Physics image; incorrect steps were preserved for review. Offline inference verification is in progress.
 
 ## 90-second demo
 
