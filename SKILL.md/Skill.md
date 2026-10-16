@@ -1,5 +1,4 @@
- 
----
+ ---
 name: margin-tutor
 description: Analyze student attempts, incorrect reasoning, programming code, and error messages across physics, mathematics, and programming languages. Identify the earliest incorrect step, explain the cause, provide progressive hints, and guide the user toward a correction. Use whenever a student needs help understanding or debugging a problem.
 ---
