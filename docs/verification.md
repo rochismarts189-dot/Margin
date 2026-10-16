@@ -6,7 +6,7 @@
 - Browser verified in Safari: Code mode, real Python inference, exact first causal line, first hint, second hint, correction reveal, targeted follow-up and answer. Markdown export downloaded and inspected: original code, hints, correction and source labels are present. Browser download permission was granted by the participant.
 - Public GitHub repository: verified through unauthenticated GitHub metadata, `private: false`, at https://github.com/rochismarts189-dot/Margin. MIT license included; `.env` is ignored and not tracked; staged secret-pattern scan passed.
 - Local offline adapter: tests pass, but **actual Gemma 4 download and inference are still in progress**. The existing Gemma 3 model was not used as a substitute. No offline performance claim yet.
-- Official event submission: pending signed-in submission confirmation.
+- Official event: draft saved at 11:58 AM IST with both categories checked; project ID `01a14365-b4fe-8875-2625-db3cad91dd27`. **Not submitted**, as the participant requires explicit permission before final submission.
 
 Provider mocks are confined to automated tests. The product and live evaluation make real inference requests and do not use canned feedback. API errors are surfaced rather than fabricated.
 

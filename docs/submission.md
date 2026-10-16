@@ -32,3 +32,11 @@ The MVP supports introductory engineering Physics and Maths (arithmetic and line
 Open [the event page](https://www.mlh.com/events/hacktoberfest-hack-day-rajam-x-nxtwave-of-innovation-in-advanced-technologies). Sign in, confirm registration/check-in through OrganizerHQ, then **Submit Project**. Its current public route is [the submission form](https://www.mlh.com/events/hacktoberfest-hack-day-rajam-x-nxtwave-of-innovation-in-advanced-technologies/submissions/new). Select both challenges if offered, provide the actual public repository URL and verify the final confirmation. Ask the venue organizer about missing registration/check-in data.
 
 Finish before the participant's **2:00 PM IST** deadline regardless of the event's later advertised closing time.
+
+## Saved draft
+
+Draft saved in the signed-in MLH event flow at 11:58 AM IST on October 16, 2026, with both categories selected.
+
+https://www.mlh.com/events/hacktoberfest-hack-day-rajam-x-nxtwave-of-innovation-in-advanced-technologies/submissions/new?projectId=01a14365-b4fe-8875-2625-db3cad91dd27
+
+**Not submitted. The participant explicitly requires approval before final submission.** Do not click Submit Project without that approval.

@@ -1,0 +1,1139 @@
+{
+  "timestamp": "2026-10-16T06:28:55.313Z",
+  "model": "gemma4:e2b-it-q4_K_M",
+  "realInference": true,
+  "cases": [
+    {
+      "id": "incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 4,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The calculation for the final velocity contains an error in the application of the kinematic equation.",
+          "firstIssue": {
+            "step": 4,
+            "quote": "v = u + a/t",
+            "misconception": "The student incorrectly used the equation $v = u + a/t$ instead of the correct kinematic equation for constant acceleration, $v = u + at$."
+          },
+          "hints": [
+            "Review the standard kinematic equations for constant acceleration motion, specifically focusing on how acceleration ($a$) and time ($t$) relate to the change in velocity ($\text{or } v$).",
+            "Check the formula used in step 4 against the known physics principle for finding final velocity given initial velocity, acceleration, and time."
+          ],
+          "correction": "The correct kinematic equation relating final velocity ($v$), initial velocity ($u$), acceleration ($a$), and time ($t$) for constant acceleration is $v = u + at$. The substitution in step 4 should use this correct formula.",
+          "followUp": {
+            "question": "What is the correct kinematic equation to use when calculating the final velocity ($v$) of an object undergoing constant acceleration, given initial velocity ($u$), acceleration ($a$), and time ($t$)?",
+            "answer": "v = u + at",
+            "explanation": "This equation correctly models the relationship between initial velocity, constant acceleration, time, and final velocity."
+          },
+          "uncertainty": "The provided steps show a clear algebraic error in applying the kinematic formula. The numerical result is incorrect due to this step."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "u = 0 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "a = 2 m/s²",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "t = 5 s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "v = u + a/t",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 10 with 0.4; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            },
+            {
+              "step": 5,
+              "quote": "v = 0 + 2/5",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 10 with 0.4; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            },
+            {
+              "step": 6,
+              "quote": "v = 0.4 m/s",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 10 with 0.4; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            }
+          ],
+          "references": [
+            {
+              "quantity": "v",
+              "value": 10,
+              "unit": "m/s",
+              "rule": "v = u + a*t (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            },
+            {
+              "quantity": "s",
+              "value": 25,
+              "unit": "m",
+              "rule": "s = u*t + 0.5*a*t^2 (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 4,
+            "quote": "v = u + a/t",
+            "status": "fail",
+            "kind": "physics",
+            "detail": "The equation compares 10 with 0.4; they do not agree.",
+            "rule": "Substitution using confirmed data / applicable reference rule"
+          },
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 9742,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "correct",
+      "expectedStatus": "correct",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The student correctly identified the initial conditions, acceleration, and time, and applied the kinematic equation for final velocity under constant acceleration.",
+          "firstIssue": null,
+          "hints": [
+            "Review the kinematic equation used to find the final velocity.",
+            "Verify the substitution of the known values into the chosen equation."
+          ],
+          "correction": "The steps correctly apply the kinematic equation $v = u + at$. Substituting the given values: $v = 0 \text{ m/s} + (2 \text{ m/s}^2) \times (5 \text{ s}) = 10 \text{ m/s}$.",
+          "followUp": {
+            "question": "What is the formula used to calculate the final velocity ($v$) when initial velocity ($u$), constant acceleration ($a$), and time ($t$) are known?",
+            "answer": "v = u + at",
+            "explanation": "This is the standard kinematic equation for constant acceleration."
+          },
+          "uncertainty": "The problem is straightforward and all necessary parameters are provided. No significant uncertainty remains."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "u = 0 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "a = 2 m/s²",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "t = 5 s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "v = u + a*t",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 5,
+              "quote": "v = 0 + 2*5",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 6,
+              "quote": "v = 10 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "v",
+              "value": 10,
+              "unit": "m/s",
+              "rule": "v = u + a*t (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            },
+            {
+              "quantity": "s",
+              "value": 25,
+              "unit": "m",
+              "rule": "s = u*t + 0.5*a*t^2 (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 2874,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "incomplete",
+      "passed": false,
+      "error": "Gemma returned feedback that failed validation. Please retry; no unvalidated feedback was displayed.",
+      "code": "MODEL_OUTPUT_INVALID"
+    },
+    {
+      "id": "ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student correctly identifies the need for the net force and acceleration formula, but fails to account for the missing frictional force, leading to an incomplete solution.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "F_net = 10 N - friction",
+            "misconception": "The student incorrectly assumes that the net force is the applied force minus the frictional force, without recognizing that the frictional force is an unknown quantity that must be determined or provided to calculate the net force."
+          },
+          "hints": [
+            "Recall Newton's Second Law ($\\Sigma F = ma$) and identify all forces acting on the box in the horizontal direction.",
+            "Since the frictional force is not given, consider what the relationship between the applied force, friction, and the net force implies for the given information."
+          ],
+          "correction": "The net force ($\\Sigma F$) is defined as the vector sum of all forces acting on the object. In the horizontal direction, the forces are the applied force ($F_{applied}$) in the direction of motion and the kinetic frictional force ($f_k$) opposing the motion. Therefore, $\\Sigma F = F_{applied} - f_k$. Newton's Second Law states $\\Sigma F = ma$. Thus, $F_{applied} - f_k = ma$. Since the frictional force ($f_k$) is not provided, the acceleration ($a$) cannot be determined numerically.",
+          "followUp": {
+            "question": "If the frictional force were 3 N, what would the acceleration of the box be?",
+            "answer": "...",
+            "explanation": "..."
+          },
+          "uncertainty": "The problem is ambiguous because the frictional force is not provided, making a numerical answer for acceleration impossible without an assumption about friction."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 2 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "Applied force = 10 N",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 3,
+              "quote": "F_net = 10 N - friction",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 4,
+              "quote": "a = F_net/m",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 5,
+              "quote": "I need the frictional force to find a numerical acceleration.",
+              "status": "unverified",
+              "detail": "No complete supported equation on this line."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 4871,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "energy",
+      "expectedStatus": "incorrect",
+      "expectedStep": 3,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The calculation for kinetic energy is incorrect because the formula used does not match the standard definition, leading to an incorrect final result.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "KE = 0.5*m*v",
+            "misconception": "The student used the formula for work ($W = Fd$) or a simplified, incorrect form of kinetic energy ($KE = 0.5mv$) instead of the correct formula for classical kinetic energy ($KE = 0.5mv^2$). The student substituted $v$ instead of $v^2$ in the kinetic energy equation."
+          },
+          "hints": [
+            "Review the fundamental equation for classical kinetic energy. Ensure you are using the correct power of velocity in the formula.",
+            "Check the units and the relationship between mass, velocity, and kinetic energy to ensure dimensional consistency."
+          ],
+          "correction": "The formula for classical kinetic energy (KE) is $KE = \\frac{1}{2}mv^2$. Substituting the given values: $KE = 0.5 \\times 2 \\text{ kg} \\times (3 \\text{ m/s})^2$.",
+          "followUp": {
+            "question": "What is the correct formula for classical kinetic energy?",
+            "answer": "\\frac{1}{2}mv^2",
+            "explanation": "The classical kinetic energy of an object is defined as half the product of its mass ($m$) and the square of its speed ($v$)."
+          },
+          "uncertainty": "The initial steps provided the correct mass and velocity. The error lies solely in the application of the kinetic energy formula."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 2 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "v = 3 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "KE = 0.5*m*v",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 9 with 3; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            },
+            {
+              "step": 4,
+              "quote": "KE = 3 J",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 9 with 3; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            }
+          ],
+          "references": [
+            {
+              "quantity": "KE",
+              "value": 9,
+              "unit": "J",
+              "rule": "KE = 0.5*m*v^2 (classical kinetic energy)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 3,
+            "quote": "KE = 0.5*m*v",
+            "status": "fail",
+            "kind": "physics",
+            "detail": "The equation compares 9 with 3; they do not agree.",
+            "rule": "Substitution using confirmed data / applicable reference rule"
+          },
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 4566,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "work",
+      "expectedStatus": "incorrect",
+      "expectedStep": 4,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The calculation for the work done is incorrect based on the provided steps and the expected result.",
+          "firstIssue": {
+            "step": 4,
+            "quote": "W = 6*4 = 20 J",
+            "misconception": "The calculation step incorrectly equates the product of the force and displacement to 20 J, despite the preceding steps suggesting a different calculation or an error in the expected result."
+          },
+          "hints": [
+            "Review the definition of work done by a constant force acting in the direction of displacement.",
+            "Verify the units and the final numerical calculation based on the formula for work."
+          ],
+          "correction": "The work done ($W$) by a constant force ($F$) acting parallel to a displacement ($s$) is calculated using the formula $W = Fs$. Substituting the given values: $W = (6 \text{ N}) \times (4 \text{ m})$. The resulting work done is $24 \text{ J}$.",
+          "followUp": {
+            "question": "If the force was 6 N and the displacement was 4 m, what is the work done?",
+            "answer": "24 J",
+            "explanation": "Work done by a constant force is the product of the magnitude of the force and the magnitude of the displacement, $W = Fs$."
+          },
+          "uncertainty": "The provided steps led to 20 J, but the correct calculation yields 24 J. The error lies in the final arithmetic step."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "F = 6 N",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "s = 4 m",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "W = F*s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "W = 6*4 = 20 J",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 24 with 20; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            }
+          ],
+          "references": [
+            {
+              "quantity": "W",
+              "value": 24,
+              "unit": "J",
+              "rule": "W = F*s (constant force parallel to displacement)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 4,
+            "quote": "W = 6*4 = 20 J",
+            "status": "fail",
+            "kind": "physics",
+            "detail": "The equation compares 24 with 20; they do not agree.",
+            "rule": "Substitution using confirmed data / applicable reference rule"
+          },
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 3831,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 3,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The final step incorrectly solves for x based on the preceding equation.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "x = 8",
+            "misconception": "The student correctly derived 2x = 8 in the previous step, but the final step incorrectly concludes that x = 8. This is an arithmetic error in isolating x."
+          },
+          "hints": [
+            "Review the step where you isolated x from the equation 2x = 8. Think about what operation is needed to get x by itself.",
+            "Check your algebraic manipulation to ensure you are dividing both sides by the correct coefficient."
+          ],
+          "correction": "The step 'x = 8' is incorrect. To solve 2x = 8 for x, you must divide both sides by 2. The correct step is x = 8 / 2.",
+          "followUp": {
+            "question": "If you have the equation 2x = 8, what is the correct algebraic step to solve for x?",
+            "answer": "x = 4",
+            "explanation": "To isolate x, you must divide both sides of the equation by 2."
+          },
+          "uncertainty": "The provided steps show a clear algebraic error in the final step."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 3,
+              "quote": "x = 8",
+              "status": "fail",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation changes the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 3,
+            "quote": "x = 8",
+            "status": "fail",
+            "kind": "algebra",
+            "rule": "Affine reduction with floating-point tolerance 1e-9",
+            "detail": "This equation changes the solution set of the confirmed reference equation."
+          },
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 4066,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-correct",
+      "expectedStatus": "correct",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The equation was solved correctly by isolating x in two steps.",
+          "firstIssue": null,
+          "hints": [
+            "Ensure you are isolating the term with x before dividing by the coefficient.",
+            "Check your arithmetic when solving for x."
+          ],
+          "correction": "The steps correctly isolate x: 2x + 3 = 11 \nSubtract 3 from both sides: 2x = 11 - 3 \n2x = 8 \nDivide both sides by 2: x = 8 / 2 \nx = 4",
+          "followUp": {
+            "question": "If 2x + 3 = 11, what is the value of x?",
+            "answer": "4",
+            "explanation": "Subtract 3 from both sides to get 2x = 8, and then divide by 2 to find x=4."
+          },
+          "uncertainty": "The problem is a simple linear equation, so no significant uncertainty exists."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 3,
+              "quote": "x = 4",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 2962,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The equation was solved correctly by isolating x and dividing by 2.",
+          "firstIssue": null,
+          "hints": [
+            "Remember to isolate the term with x before dividing by its coefficient.",
+            "Now, perform the final division to find the value of x."
+          ],
+          "correction": "The first step, $2x + 3 = 11$, is correct. The second step, $2x = 8$, is a correct algebraic manipulation of the first step. To solve for $x$, divide both sides of $2x = 8$ by 2.",
+          "followUp": {
+            "question": "If $2x = 8$, what is the value of $x$?",
+            "answer": "$x = 4$",
+            "explanation": "To find $x$, divide both sides of the equation $2x = 8$ by 2."
+          },
+          "uncertainty": "The solution is a single numerical value, so no ambiguity exists."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 2688,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "ambiguous",
+          "summary": "The problem asks for a numerical value of x given the equation $x + a = 7$, but the value of the parameter 'a' is not specified, making a numerical solution impossible.",
+          "firstIssue": {
+            "step": 1,
+            "quote": "x + a = 7",
+            "misconception": "The student has attempted to solve for x but has not recognized that the equation contains two unknowns (x and a) and requires a value for 'a' to find a unique numerical value for 'x'."
+          },
+          "hints": [
+            "The equation $x + a = 7$ has two variables. To find a specific numerical value for $x$, you need a specific numerical value for $a$.",
+            "Since $a$ is not given, consider what the solution set for $x$ looks like in terms of $a$."
+          ],
+          "correction": "The problem cannot be solved for a unique numerical value of $x$ because the value of the parameter $a$ is not provided. The solution set for $x$ is $x = 7 - a$.",
+          "followUp": {
+            "question": "If $a$ were equal to 3, what would be the value of $x$?",
+            "answer": "4",
+            "explanation": "If $a=3$, then $x + 3 = 7$, so $x = 7 - 3 = 4$."
+          },
+          "uncertainty": "A numerical answer cannot be provided without a specified value for the parameter 'a'."
+        },
+        "status": "ambiguous",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "x + a = 7",
+              "status": "unverified",
+              "detail": "Needs a confirmed linear reference equation in x, or explicit numeric arithmetic."
+            },
+            {
+              "step": 2,
+              "quote": "x = 7 - a",
+              "status": "unverified",
+              "detail": "Needs a confirmed linear reference equation in x, or explicit numeric arithmetic."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 3897,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 3,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The function crashes with an IndexError because the loop attempts to access elements in the list `numbers` beyond its valid indices, specifically when `i` reaches `len(numbers)` or beyond.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "    for i in range(len(numbers) + 1):",
+            "misconception": "The student is trying to iterate over the indices of the list, but they are iterating one step too far, causing an attempt to access an index that does not exist in the list, leading to an IndexError."
+          },
+          "hints": [
+            "Hint 1: Think about how list indices relate to the length of the list. What is the valid range for indices in a list of length N?",
+            "Hint 2: Consider what happens when you try to access `numbers[len(numbers)]` if the list has length N."
+          ],
+          "correction": "    result = 0\n    for number in numbers:\n        result += number\n    return result",
+          "followUp": {
+            "question": "If the input list is `[]`, what should the function return according to the requirement?",
+            "answer": "0",
+            "explanation": "The requirement states that an empty list should return 0, which is handled correctly by initializing `result = 0` and having an empty loop."
+          },
+          "uncertainty": "The provided solution assumes the goal is to sum all elements. If the requirement was to sum elements up to a certain index, the logic would need adjustment."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "def total(numbers):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "    result = 0",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "    for i in range(len(numbers) + 1):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 4,
+              "quote": "        result += numbers[i]",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 5,
+              "quote": "    return result",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Python code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 4885,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-correct",
+      "expectedStatus": "correct",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The provided Python function correctly calculates the sum of a list of numbers and returns 0 for an empty list, fulfilling the requirement.",
+          "firstIssue": null,
+          "hints": [
+            "The initial setup correctly initializes the accumulator variable to the required default value for an empty sum.",
+            "Consider what happens when the input list `numbers` is empty; trace the loop execution path."
+          ],
+          "correction": "The code is correct as written. The initialization `result = 0` ensures that if the loop does not run (i.e., `numbers` is empty), 0 is returned, which is the desired behavior.",
+          "followUp": {
+            "question": "If the input list is `[]`, what value will be returned by `total([])`?",
+            "answer": "0",
+            "explanation": "The function initializes `result` to 0. Since the loop over an empty list does not execute, the function immediately returns the initial value of `result`, which is 0."
+          },
+          "uncertainty": "The problem statement is fully satisfied by the provided code."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "def total(numbers):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "    result = 0",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "    for value in numbers:",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 4,
+              "quote": "        result += value",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 5,
+              "quote": "    return result",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Python code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 5473,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The function is defined but the logic to find the maximum value is missing.",
+          "firstIssue": {
+            "step": 2,
+            "quote": "    # TODO: compare the elements and return the largest",
+            "misconception": "The student has correctly defined the function signature but has not yet implemented the core logic required to iterate through the list and compare elements to find the maximum."
+          },
+          "hints": [
+            "Consider how you can initialize a variable to compare against the elements in the list.",
+            "Think about how you can iterate over the list to check every number against your current maximum candidate."
+          ],
+          "correction": "    if not numbers: return None # Although the prompt says 'nonempty', this is good practice. \n    largest = numbers[0] \n    for number in numbers: \n        if number > largest: \n            largest = number \n    return largest",
+          "followUp": {
+            "question": "If the input list is [3, 1, 4, 1, 5, 9, 2, 6], what should the function return?",
+            "answer": "9",
+            "explanation": "The function should iterate through the list, keeping track of the largest number encountered so far. Starting with the first element as the initial maximum is a standard approach."
+          },
+          "uncertainty": "The prompt states the list is 'nonempty', but robust code often handles empty lists. Assuming the input adheres to the 'nonempty' constraint for the core logic."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "def maximum(numbers):",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "    # TODO: compare the elements and return the largest",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "    pass",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Python code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 4044,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The function `process(value)` calls an undefined function `transform(value)` without defining what `transform` does or what the expected output is, making the function non-functional as written.",
+          "firstIssue": {
+            "step": 1,
+            "quote": "function process(value) {",
+            "misconception": "The student is treating `transform(value)` as a known, defined operation, whereas in this context, it is an undefined function call, leading to a runtime error or undefined behavior depending on the environment."
+          },
+          "hints": [
+            "Hint 1: Think about what a function call implies when the function being called is not defined in the scope or provided context.",
+            "Hint 2: Examine the definition or context of the `transform` function that `process` relies on."
+          ],
+          "correction": "The function `transform` must be defined before it can be called within `process`, or the function call must be replaced with a concrete operation that produces the expected output.",
+          "followUp": {
+            "question": "If `transform` were defined as `transform(x) { return x * 2; }`, what would be the return value of `process(5)`?",
+            "answer": "10",
+            "explanation": "If `transform` multiplies its input by 2, then `process(5)` would return 10."
+          },
+          "uncertainty": "The expected behavior of the function is completely unspecified, making it impossible to determine the correct implementation of `transform` or the final expected output."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "function process(value) {",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "  return transform(value);",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "}",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "JavaScript code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 4377,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-js-incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 2,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The function is performing string concatenation instead of arithmetic addition because the inputs are treated as strings.",
+          "firstIssue": {
+            "step": 2,
+            "quote": "  return a + b;",
+            "misconception": "The student is treating the inputs `a` and `b` as strings when the `+` operator in JavaScript performs string concatenation when one or both operands are strings, rather than numerical addition."
+          },
+          "hints": [
+            "Consider what happens when you use the `+` operator with two strings versus two numbers in JavaScript.",
+            "Examine the data types of `a` and `b` inside the function when the call `add(\"2\", \"3\")` is made."
+          ],
+          "correction": "function add(a, b) {\n  return parseInt(a) + parseInt(b);\n}",
+          "followUp": {
+            "question": "If you change the function to use `parseInt()` on the inputs, what is the expected output for `add(\"2\", \"3\")`?",
+            "answer": "5",
+            "explanation": "`parseInt()` converts the string inputs to integers before the addition is performed, resulting in the correct numerical sum."
+          },
+          "uncertainty": "The provided code snippet is minimal, but the error description strongly suggests a type coercion issue common in JavaScript arithmetic operations."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "function add(a, b) {",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "  return a + b;",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "}",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "JavaScript code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 3516,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    }
+  ]
+}

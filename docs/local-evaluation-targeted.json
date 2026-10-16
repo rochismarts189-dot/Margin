@@ -1,0 +1,306 @@
+{
+  "timestamp": "2026-10-16T06:31:49.941Z",
+  "model": "gemma4:e2b-it-q4_K_M",
+  "realInference": true,
+  "cases": [
+    {
+      "id": "incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student has correctly identified the relevant physical quantities and the formula for net force ($F=ma$) but has not performed the final substitution to find the numerical value of the net force.",
+          "firstIssue": {
+            "step": 4,
+            "quote": "I have not substituted the numbers or found the final force yet.",
+            "misconception": "The student has correctly identified the relationship between mass, acceleration, and net force but has stopped before executing the final calculation step required to obtain the numerical answer."
+          },
+          "hints": [
+            "Review the formula you used and identify which values you have and which you need to substitute.",
+            "Substitute the given values for mass ($m$) and acceleration ($a$) into the equation for net force ($F=ma$)."
+          ],
+          "correction": "The net force ($F$) is calculated by multiplying the mass ($m$) by the acceleration ($a$). Using the provided values, the calculation should be $F = (3 \text{ kg}) \times (4 \text{ m/s}^2)$.",
+          "followUp": {
+            "question": "What is the resulting value when you multiply 3 by 4?",
+            "answer": "12",
+            "explanation": "This step completes the calculation for the net force, resulting in a value of 12 Newtons."
+          },
+          "uncertainty": "No specific uncertainty identified; the problem is fully specified."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 3 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "a = 4 m/s²",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "F = m*a",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "I have not substituted the numbers or found the final force yet.",
+              "status": "unverified",
+              "detail": "No complete supported equation on this line."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "F",
+              "value": 12,
+              "unit": "N",
+              "rule": "F_net = m*a (inertial frame, constant mass)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 5221,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student correctly identifies the need for the frictional force to calculate the net force, but the problem statement does not provide the frictional force, making a numerical answer impossible.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "F_net = 10 N - friction",
+            "misconception": "The student sets up the equation for net force but incorrectly assumes that the net force is the applied force minus the friction force without acknowledging that the friction force is an unknown variable that must be determined or provided."
+          },
+          "hints": [
+            "Recall Newton's Second Law ($\\Sigma F = ma$) and identify all forces acting on the box in the horizontal direction.",
+            "Examine the problem statement again to see if any information about the frictional force is implicitly given or if an assumption about it should be made."
+          ],
+          "correction": "The equation for net force is $\\Sigma F = F_{applied} - F_{friction}$. According to Newton's Second Law, $\\Sigma F = ma$. Therefore, $ma = F_{applied} - F_{friction}$. To find the acceleration ($a$), you need the value of the frictional force ($F_{friction}$). Since the problem states the frictional force is not given, the acceleration cannot be determined numerically.",
+          "followUp": {
+            "question": "If the frictional force were 3 N, what would the acceleration of the box be?",
+            "answer": "1.5 m/s²",
+            "explanation": "If $F_{friction} = 3 \\text{ N}$, then $F_{net} = 10 \\text{ N} - 3 \\text{ N} = 7 \\text{ N}$. Using $a = F_{net}/m$, we get $a = 7 \\text{ N} / 2 \\text{ kg} = 3.5 \\text{ m/s}^2$. (Correction: $7/2 = 3.5$)"
+          },
+          "uncertainty": "The frictional force is not provided in the problem statement, making a numerical acceleration impossible to calculate."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 2 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "Applied force = 10 N",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 3,
+              "quote": "F_net = 10 N - friction",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 4,
+              "quote": "a = F_net/m",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 5,
+              "quote": "I need the frictional force to find a numerical acceleration.",
+              "status": "unverified",
+              "detail": "No complete supported equation on this line."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 5657,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student has correctly reduced the equation to 2x = 8 but has not isolated x to find the final solution.",
+          "firstIssue": {
+            "step": 2,
+            "quote": "2*x = 8",
+            "misconception": "The student has performed the first step of isolating the variable but has not completed the process by dividing by the coefficient of x to find the value of x."
+          },
+          "hints": [
+            "The current step isolates the term containing x. What is the next algebraic operation needed to solve for x?",
+            "Divide both sides of the equation by the coefficient of x to find the value of x."
+          ],
+          "correction": "Divide both sides of the equation 2x = 8 by 2 to solve for x.",
+          "followUp": {
+            "question": "What is the value of x after dividing both sides of 2x = 8 by 2?",
+            "answer": "x = 4",
+            "explanation": "Dividing both sides by 2 isolates x, yielding the solution x=4."
+          },
+          "uncertainty": "No specific uncertainty identified; this is model feedback, not a proof."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 3602,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "code-ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": false,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The function `process` calls an undefined function `transform`, which is the earliest causal issue preventing the function from returning a meaningful value.",
+          "firstIssue": {
+            "step": 1,
+            "quote": "function process(value) {",
+            "misconception": "The student has defined a function that calls another function (`transform`) but has not defined what `transform` does, or how it should operate on the input `value` to produce the desired output."
+          },
+          "hints": [
+            "Hint 1: Think about what the function `transform` is supposed to accomplish based on the overall goal of `process`.",
+            "Hint 2: Examine the definition or expected behavior of the `transform` function; is it defined elsewhere, or does it need to be defined within this scope?"
+          ],
+          "correction": "The function `transform` must be defined before it is called, or its behavior must be specified. For example, if `transform` is meant to double the value, it should be defined as `function transform(v) { return v * 2; }`.",
+          "followUp": {
+            "question": "If `transform` is supposed to return the input value unchanged, how would you define it?",
+            "answer": "`function transform(value) { return value; }`",
+            "explanation": "This tests the understanding of defining a simple transformation function."
+          },
+          "uncertainty": "The expected behavior of the `transform` function is completely unspecified, making it impossible to determine the correct implementation."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "function process(value) {",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 2,
+              "quote": "  return transform(value);",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            },
+            {
+              "step": 3,
+              "quote": "}",
+              "status": "unverified",
+              "kind": "code review",
+              "detail": "Model-assisted review only. This line has not been parsed, compiled, or executed."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "JavaScript code was not executed, compiled, or tested. Gemma’s diagnosis, suggested fix, and follow-up are model-generated; reproduce the issue and run tests in your own development environment. The first reported line is a hypothesis, not a verified runtime finding."
+        },
+        "inference": {
+          "provider": "Ollama · local inference",
+          "offline": true,
+          "model": "gemma4:e2b-it-q4_K_M",
+          "modelVersion": "gemma4:e2b-it-q4_K_M",
+          "milliseconds": 5313,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    }
+  ]
+}
