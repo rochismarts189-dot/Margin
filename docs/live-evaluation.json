@@ -1,37 +1,736 @@
 {
-  "timestamp": "2026-10-16T06:03:35.935Z",
+  "timestamp": "2026-10-16T06:06:49.269Z",
   "model": "gemma-4-26b-a4b-it",
   "realInference": true,
   "cases": [
     {
-      "id": "ambiguous",
+      "id": "incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 4,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The student correctly identified the initial parameters but applied an incorrect kinematic formula to calculate the final velocity.",
+          "firstIssue": {
+            "step": 4,
+            "quote": "v = u + a/t",
+            "misconception": "The student is confusing the relationship between acceleration, velocity, and time by using division instead of multiplication."
+          },
+          "hints": [
+            "Recall the definition of constant acceleration: it is the rate of change of velocity over time.",
+            "Look at the units in your equation: [m/s] = [m/s²] / [s] results in [m/s³], which does not match the required units for velocity."
+          ],
+          "correction": "The correct kinematic equation for final velocity under constant acceleration is v = u + a*t. Substituting the values: v = 0 + (2 m/s² * 5 s) = 10 m/s.",
+          "followUp": {
+            "question": "If the cart had traveled for 10 s instead of 5 s with the same acceleration, what would its final velocity be?",
+            "answer": "20 m/s",
+            "explanation": "Using v = u + at, where u = 0, a = 2, and t = 10, we get v = 0 + 2 * 10 = 20 m/s."
+          },
+          "uncertainty": "None. The error is a deterministic algebraic mistake in the formula application."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "u = 0 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "a = 2 m/s²",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "t = 5 s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "v = u + a/t",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 10 with 0.4; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            },
+            {
+              "step": 5,
+              "quote": "v = 0 + 2/5",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 10 with 0.4; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            },
+            {
+              "step": 6,
+              "quote": "v = 0.4 m/s",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 10 with 0.4; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            }
+          ],
+          "references": [
+            {
+              "quantity": "v",
+              "value": 10,
+              "unit": "m/s",
+              "rule": "v = u + a*t (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            },
+            {
+              "quantity": "s",
+              "value": 25,
+              "unit": "m",
+              "rule": "s = u*t + 0.5*a*t^2 (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 4,
+            "quote": "v = u + a/t",
+            "status": "fail",
+            "kind": "physics",
+            "detail": "The equation compares 10 with 0.4; they do not agree.",
+            "rule": "Substitution using confirmed data / applicable reference rule"
+          },
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 8605,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "correct",
+      "expectedStatus": "correct",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The student correctly identified the initial velocity, acceleration, and time from the problem statement and applied the kinematic equation for constant acceleration to find the final velocity.",
+          "firstIssue": null,
+          "hints": [
+            "The solution is complete and follows the kinematic principles for constant acceleration.",
+            "To verify, you could also calculate the total displacement during this time interval using the displacement formula."
+          ],
+          "correction": "The work is correct. The student used the equation v = u + at, substituting u = 0 m/s, a = 2 m/s², and t = 5 s to arrive at v = 10 m/s.",
+          "followUp": {
+            "question": "Using the same parameters (u = 0 m/s, a = 2 m/s², t = 5 s), what is the total distance traveled by the cart?",
+            "answer": "25 m",
+            "explanation": "Using the displacement formula s = ut + 0.5at², we get s = (0)(5) + 0.5(2)(5^2) = 0 + 25 = 25 m."
+          },
+          "uncertainty": "None. The problem is well-defined and the student's steps are mathematically and physically consistent with the provided data."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "u = 0 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "a = 2 m/s²",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "t = 5 s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "v = u + a*t",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 5,
+              "quote": "v = 0 + 2*5",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 6,
+              "quote": "v = 10 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "v",
+              "value": 10,
+              "unit": "m/s",
+              "rule": "v = u + a*t (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            },
+            {
+              "quantity": "s",
+              "value": 25,
+              "unit": "m",
+              "rule": "s = u*t + 0.5*a*t^2 (constant acceleration)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 8078,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "incomplete",
       "passed": false,
-      "error": "Could not reach Gemma within 90 seconds. Check your connection and retry.",
-      "code": "PROVIDER_UNREACHABLE"
+      "error": "Gemma’s service returned an error. Please retry shortly.",
+      "code": "PROVIDER_ERROR"
+    },
+    {
+      "id": "ambiguous",
+      "expectedStatus": "ambiguous",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "ambiguous",
+          "summary": "The problem specification is missing the value of the frictional force required to calculate a numerical acceleration.",
+          "firstIssue": null,
+          "hints": [
+            "Review the problem statement to see if a coefficient of friction or a specific frictional force value was provided.",
+            "Determine if the question expects a symbolic expression for acceleration in terms of friction, or if a numerical value is truly possible with the current data."
+          ],
+          "correction": "The problem is underspecified. To find a numerical value for acceleration, the magnitude of the frictional force or the coefficient of kinetic friction must be provided.",
+          "followUp": {
+            "question": "If the frictional force is 4 N, what is the acceleration of the 2 kg box?",
+            "answer": "3 m/s^2",
+            "explanation": "Using F_net = F_applied - F_friction = 10 N - 4 N = 6 N. Then, a = F_net / m = 6 N / 2 kg = 3 m/s^2."
+          },
+          "uncertainty": "The numerical result cannot be determined because the frictional force is an unknown parameter in the problem description."
+        },
+        "status": "ambiguous",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 2 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "Applied force = 10 N",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 3,
+              "quote": "F_net = 10 N - friction",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 4,
+              "quote": "a = F_net/m",
+              "status": "unverified",
+              "detail": "Needs confirmed values or notation outside the bounded verifier."
+            },
+            {
+              "step": 5,
+              "quote": "I need the frictional force to find a numerical acceleration.",
+              "status": "unverified",
+              "detail": "No complete supported equation on this line."
+            }
+          ],
+          "references": [],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 7501,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "energy",
+      "expectedStatus": "incorrect",
+      "expectedStep": 3,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The student correctly identified the mass and velocity but used an incorrect formula for kinetic energy, leading to an incorrect numerical result.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "KE = 0.5*m*v",
+            "misconception": "The student likely omitted the exponent for velocity in the kinetic energy formula."
+          },
+          "hints": [
+            "Review the standard formula for classical kinetic energy and check the relationship between energy and velocity.",
+            "Ensure that the velocity term is squared in your substitution."
+          ],
+          "correction": "The correct formula for kinetic energy is KE = 0.5 * m * v^2. Substituting the given values: KE = 0.5 * 2 kg * (3 m/s)^2 = 1 * 9 = 9 J.",
+          "followUp": {
+            "question": "If the velocity of the 2 kg object is doubled to 6 m/s, by what factor does the kinetic energy increase?",
+            "answer": "4",
+            "explanation": "Since kinetic energy is proportional to the square of the velocity (KE ∝ v^2), doubling the velocity (2v) results in a factor of 2^2 = 4 increase in energy."
+          },
+          "uncertainty": "None. The error is a clear mathematical/formulaic omission."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 2 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "v = 3 m/s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "KE = 0.5*m*v",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 9 with 3; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            },
+            {
+              "step": 4,
+              "quote": "KE = 3 J",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 9 with 3; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            }
+          ],
+          "references": [
+            {
+              "quantity": "KE",
+              "value": 9,
+              "unit": "J",
+              "rule": "KE = 0.5*m*v^2 (classical kinetic energy)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 3,
+            "quote": "KE = 0.5*m*v",
+            "status": "fail",
+            "kind": "physics",
+            "detail": "The equation compares 9 with 3; they do not agree.",
+            "rule": "Substitution using confirmed data / applicable reference rule"
+          },
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 8673,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "work",
+      "expectedStatus": "incorrect",
+      "expectedStep": 4,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The student correctly identified the formula for work but made an arithmetic error during the final substitution.",
+          "firstIssue": {
+            "step": 4,
+            "quote": "W = 6*4 = 20 J",
+            "misconception": "The student performed an incorrect multiplication of the force and displacement values."
+          },
+          "hints": [
+            "Re-examine the arithmetic in your final substitution step.",
+            "Multiply the value of the force (6 N) by the displacement (4 m) again to ensure accuracy."
+          ],
+          "correction": "The work done is calculated as W = F * s. Substituting the given values: W = 6 N * 4 m = 24 J.",
+          "followUp": {
+            "question": "If the force was applied at an angle of 60 degrees to the displacement instead of parallel, how would the formula for work change?",
+            "answer": "W = F * s * cos(theta)",
+            "explanation": "When a force is not parallel to the displacement, only the component of the force in the direction of motion (F * cos(theta)) does work."
+          },
+          "uncertainty": "None. The error is a deterministic arithmetic failure."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "F = 6 N",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "s = 4 m",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "W = F*s",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "W = 6*4 = 20 J",
+              "status": "fail",
+              "kind": "physics",
+              "detail": "The equation compares 24 with 20; they do not agree.",
+              "rule": "Substitution using confirmed data / applicable reference rule"
+            }
+          ],
+          "references": [
+            {
+              "quantity": "W",
+              "value": 24,
+              "unit": "J",
+              "rule": "W = F*s (constant force parallel to displacement)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 4,
+            "quote": "W = 6*4 = 20 J",
+            "status": "fail",
+            "kind": "physics",
+            "detail": "The equation compares 24 with 20; they do not agree.",
+            "rule": "Substitution using confirmed data / applicable reference rule"
+          },
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 7769,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-incorrect",
+      "expectedStatus": "incorrect",
+      "expectedStep": 3,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incorrect",
+          "summary": "The student correctly isolated the term with x but failed to perform the final division step correctly.",
+          "firstIssue": {
+            "step": 3,
+            "quote": "x = 8",
+            "misconception": "The student likely treated the coefficient of x as 1 or simply forgot to divide the constant by the coefficient during the final isolation step."
+          },
+          "hints": [
+            "Look at the relationship between the coefficient of x and the value on the right side of the equation in your last step.",
+            "To isolate x in the equation 2*x = 8, what operation should be applied to both sides?"
+          ],
+          "correction": "In step 3, the equation 2*x = 8 requires dividing both sides by 2 to solve for x, resulting in x = 4.",
+          "followUp": {
+            "question": "Solve 3*x = 15 for x.",
+            "answer": "x = 5",
+            "explanation": "Divide both sides of the equation by the coefficient 3 to isolate x."
+          },
+          "uncertainty": "The error is a clear arithmetic/algebraic failure in the final step; no ambiguity in the problem or student notation was detected."
+        },
+        "status": "incorrect",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 3,
+              "quote": "x = 8",
+              "status": "fail",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation changes the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": {
+            "step": 3,
+            "quote": "x = 8",
+            "status": "fail",
+            "kind": "algebra",
+            "rule": "Affine reduction with floating-point tolerance 1e-9",
+            "detail": "This equation changes the solution set of the confirmed reference equation."
+          },
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 7505,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-correct",
+      "expectedStatus": "correct",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "correct",
+          "summary": "The student correctly applied the properties of equality to isolate the variable x and arrived at the correct numerical value.",
+          "firstIssue": null,
+          "hints": [
+            "Review how you isolated the term containing x in the first step.",
+            "Verify that the final division step correctly undoes the multiplication by 2."
+          ],
+          "correction": "The derivation is correct: subtracting 3 from both sides yields 2x = 8, and dividing both sides by 2 yields x = 4.",
+          "followUp": {
+            "question": "Solve 3*x - 5 = 16 for x.",
+            "answer": "x = 7",
+            "explanation": "Add 5 to both sides to get 3x = 21, then divide by 3 to get x = 7."
+          },
+          "uncertainty": "None. The arithmetic and algebraic transformations are verified against the reference equation."
+        },
+        "status": "correct",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 3,
+              "quote": "x = 4",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 6342,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    },
+    {
+      "id": "maths-incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student has correctly performed the first two algebraic transformations but has not yet isolated x to find the final numerical value.",
+          "firstIssue": null,
+          "hints": [
+            "You have successfully isolated the term containing x. What is the final operation needed to solve for x alone?",
+            "Look at the coefficient of x in your last equation. How can you undo multiplication by 2?"
+          ],
+          "correction": "The next step is to divide both sides of the equation '2*x = 8' by 2 to isolate x.",
+          "followUp": {
+            "question": "Solve 3*x - 5 = 10 for x.",
+            "answer": "x = 5",
+            "explanation": "Add 5 to both sides to get 3*x = 15, then divide by 3 to get x = 5."
+          },
+          "uncertainty": "None. The student's work is mathematically sound but unfinished."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "2*x + 3 = 11",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            },
+            {
+              "step": 2,
+              "quote": "2*x = 8",
+              "status": "pass",
+              "kind": "algebra",
+              "rule": "Affine reduction with floating-point tolerance 1e-9",
+              "detail": "This equation preserves the solution set of the confirmed reference equation."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "Solution set",
+              "value": "x = 4",
+              "unit": "",
+              "rule": "2*x + 3 = 11",
+              "source": "User-confirmed reference; independent affine solver"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Maths checks cover numeric arithmetic and linear equations in x with a confirmed reference. Other algebra, geometry, calculus, and proofs are unverified model judgments. Arithmetic uses floating point, not exact rational arithmetic."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 6248,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
     },
     {
       "id": "maths-ambiguous",
       "expectedStatus": "ambiguous",
       "expectedStep": null,
-      "passed": false,
+      "passed": true,
       "result": {
         "feedback": {
-          "status": "incomplete",
-          "summary": "The student correctly manipulated the equation to isolate x, but failed to provide a numerical value as requested because the value of 'a' is unknown.",
+          "status": "ambiguous",
+          "summary": "The problem asks for a numerical value of x, but the parameter 'a' is not defined, making a single numerical solution impossible.",
           "firstIssue": null,
           "hints": [
-            "Review the question to see if a specific numerical value for 'a' was provided or if the problem can be solved numerically without it.",
-            "Consider what information is missing to transform the expression '7 - a' into a single number."
+            "Review the question to see if a specific value for the constant 'a' was provided.",
+            "Consider how the value of 'x' would change if 'a' were assigned different numbers."
           ],
-          "correction": "The steps correctly isolate x as '7 - a', but since 'a' is an unspecified constant, a single numerical value for x cannot be determined. To complete the solution, a value for 'a' must be provided.",
+          "correction": "The problem is underspecified because 'a' is an unknown parameter. A numerical value for x cannot be determined without knowing 'a'.",
           "followUp": {
             "question": "If x + a = 7 and a = 3, what is the numerical value of x?",
             "answer": "4",
             "explanation": "Substitute a = 3 into the equation: x + 3 = 7. Subtract 3 from both sides to get x = 4."
           },
-          "uncertainty": "The problem is underspecified as 'a' is not defined, making a numerical solution impossible."
+          "uncertainty": "The status is ambiguous because the problem specification itself lacks the necessary parameter 'a' to reach a numerical result."
         },
-        "status": "incomplete",
+        "status": "ambiguous",
         "conflict": false,
         "verification": {
           "checks": [
@@ -55,9 +754,10 @@
         },
         "inference": {
           "provider": "Google Gemini API",
+          "offline": false,
           "model": "gemma-4-26b-a4b-it",
           "modelVersion": "gemma-4-26b-a4b-it",
-          "milliseconds": 7252,
+          "milliseconds": 6588,
           "realInference": true,
           "validation": "Schema, field limits, step index, and exact student quote validated"
         }
@@ -71,23 +771,23 @@
       "result": {
         "feedback": {
           "status": "incorrect",
-          "summary": "The function attempts to access an index that is beyond the bounds of the list due to an off-by-one error in the range calculation.",
+          "summary": "The function attempts to access an index that is one position beyond the end of the list due to an incorrect range boundary.",
           "firstIssue": {
             "step": 3,
             "quote": "    for i in range(len(numbers) + 1):",
-            "misconception": "The student likely believes that the `range` function includes the stop value, or that the length of a list corresponds to the highest valid index."
+            "misconception": "The student likely believes that the `range` function's upper bound is inclusive, or they are confusing the length of the list with the maximum valid index."
           },
           "hints": [
-            "Recall how Python's `range(stop)` function behaves regarding the inclusion of the 'stop' value.",
-            "Try tracing the loop with a list of length 2: what are the values of `i` produced by `range(len(numbers) + 1)`?"
+            "Recall how Python's `range(stop)` function behaves regarding the inclusion of the `stop` value.",
+            "Try tracing the loop with a list of length 1 (e.g., `[5]`) and check what the final value of `i` becomes."
           ],
-          "correction": "for i in range(len(numbers)):",
+          "correction": "    for i in range(len(numbers)):",
           "followUp": {
-            "question": "How would you rewrite this function using a more 'Pythonic' way that iterates directly over the elements instead of using indices?",
+            "question": "How would you rewrite this loop using a more 'Pythonic' approach that iterates directly over the elements instead of using indices?",
             "answer": "for num in numbers:\n    result += num",
-            "explanation": "In Python, it is generally preferred to iterate over the items in a collection directly rather than managing an index variable manually."
+            "explanation": "In Python, it is generally preferred to iterate over the items in a collection directly rather than managing an index variable manually, which avoids off-by-one errors."
           },
-          "uncertainty": "None. The error is a deterministic IndexError caused by the range bounds."
+          "uncertainty": "Static model review only; code was not executed."
         },
         "status": "incorrect",
         "conflict": false,
@@ -136,9 +836,10 @@
         },
         "inference": {
           "provider": "Google Gemini API",
+          "offline": false,
           "model": "gemma-4-26b-a4b-it",
           "modelVersion": "gemma-4-26b-a4b-it",
-          "milliseconds": 8040,
+          "milliseconds": 8096,
           "realInference": true,
           "validation": "Schema, field limits, step index, and exact student quote validated"
         }
@@ -152,19 +853,19 @@
       "result": {
         "feedback": {
           "status": "correct",
-          "summary": "The function correctly implements the summation logic, including the edge case for an empty list.",
+          "summary": "The function correctly implements the summation logic and handles the empty list case by initializing the accumulator to 0.",
           "firstIssue": null,
           "hints": [
             "Consider how the loop behaves if the input list contains no elements.",
-            "Verify that the initial value of 'result' is the additive identity."
+            "Verify if the initial value of 'result' matches the identity element for addition."
           ],
-          "correction": "The code is correct as written. It initializes the accumulator to 0, iterates through all elements, and returns 0 if the loop never executes.",
+          "correction": "The code is correct as written. It initializes 'result' to 0, which is the additive identity, ensuring that an empty list returns 0 and non-empty lists sum correctly.",
           "followUp": {
             "question": "How would you modify this function to return the product of a list of numbers, ensuring it returns 1 for an empty list?",
-            "answer": "def product(numbers):\n    result = 1\n    for value in numbers:\n        result *= value\n    return result",
-            "explanation": "To calculate a product, the accumulator must be initialized to the multiplicative identity (1) instead of the additive identity (0)."
+            "answer": "result = 1",
+            "explanation": "For multiplication, the identity element is 1. Initializing to 0 would cause all products to result in 0."
           },
-          "uncertainty": "Static model review only; no runtime execution performed."
+          "uncertainty": "Static model review only; no execution performed."
         },
         "status": "correct",
         "conflict": false,
@@ -213,9 +914,10 @@
         },
         "inference": {
           "provider": "Google Gemini API",
+          "offline": false,
           "model": "gemma-4-26b-a4b-it",
           "modelVersion": "gemma-4-26b-a4b-it",
-          "milliseconds": 6427,
+          "milliseconds": 84709,
           "realInference": true,
           "validation": "Schema, field limits, step index, and exact student quote validated"
         }
@@ -229,7 +931,7 @@
       "result": {
         "feedback": {
           "status": "incomplete",
-          "summary": "The student has provided the function signature and a comment, but the logic for finding the maximum value has not yet been implemented.",
+          "summary": "The student has defined the function signature and a comment but has not yet implemented the logic to find the maximum value.",
           "firstIssue": null,
           "hints": [
             "Think about how you might keep track of the largest number seen so far as you look through the list one by one.",
@@ -237,11 +939,11 @@
           ],
           "correction": "Implement the logic using a loop: \n    max_val = numbers[0]\n    for num in numbers:\n        if num > max_val:\n            max_val = num\n    return max_val",
           "followUp": {
-            "question": "How would you modify your function to return the index of the largest value instead of the value itself?",
-            "answer": "Use enumerate() to track the index during the loop.",
-            "explanation": "To find the position of an element, you need to track the current index while iterating, which is most efficiently done with the enumerate() function in Python."
+            "question": "How would you modify your function to handle an empty list without causing an error?",
+            "answer": "Return None or raise a ValueError.",
+            "explanation": "Accessing `numbers[0]` on an empty list raises an IndexError. A robust function should check if the list is empty first."
           },
-          "uncertainty": "The code is marked as incomplete because the student explicitly stated they have 'only started implementing it' and used a 'pass' statement."
+          "uncertainty": "The student's intent is clear, but the implementation is entirely missing, making it impossible to judge algorithmic efficiency or edge-case handling."
         },
         "status": "incomplete",
         "conflict": false,
@@ -276,9 +978,10 @@
         },
         "inference": {
           "provider": "Google Gemini API",
+          "offline": false,
           "model": "gemma-4-26b-a4b-it",
           "modelVersion": "gemma-4-26b-a4b-it",
-          "milliseconds": 7690,
+          "milliseconds": 82178,
           "realInference": true,
           "validation": "Schema, field limits, step index, and exact student quote validated"
         }
@@ -288,25 +991,25 @@
       "id": "code-ambiguous",
       "expectedStatus": "ambiguous",
       "expectedStep": null,
-      "passed": false,
+      "passed": true,
       "result": {
         "feedback": {
-          "status": "incomplete",
-          "summary": "The code attempts to call a function named `transform` which has not been defined or provided in the context, making the logic impossible to evaluate.",
+          "status": "ambiguous",
+          "summary": "The code attempts to call a function `transform` that has not been defined, and the problem specification does not provide the intended logic for `transform` or the expected output.",
           "firstIssue": null,
           "hints": [
-            "Consider the dependency requirements of a function: what must exist in the scope for a function call to succeed?",
-            "Try to trace the execution flow: if you were to run `process(5)`, where would the computer look for the definition of `transform`?"
+            "Consider what happens when a program attempts to call a name that has not been declared in the current scope.",
+            "Try defining a dummy `transform` function that simply returns the input to see if the `process` function executes without error."
           ],
-          "correction": "Define the `transform` function before calling it within `process`, or pass it as a callback argument.",
+          "correction": "Define the `transform` function before calling it in `process`, or pass it as a callback argument to `process` to make the function more flexible.",
           "followUp": {
-            "question": "How would you modify the `process` function signature so that the user can decide which transformation to apply at runtime?",
+            "question": "How would you modify the `process` function signature so that the user can provide their own transformation logic at runtime?",
             "answer": "function process(value, transform) { return transform(value); }",
-            "explanation": "By adding `transform` as a second parameter, the function becomes a higher-order function that accepts a transformation logic as an argument."
+            "explanation": "By adding `transform` as a second parameter, the function becomes a higher-order function, allowing the caller to inject the specific behavior needed."
           },
-          "uncertainty": "The intended behavior of `transform` is unknown, so the correctness of the logic cannot be determined."
+          "uncertainty": "The problem is ambiguous because the intended behavior of `transform` and its definition are entirely missing from the provided context."
         },
-        "status": "incomplete",
+        "status": "ambiguous",
         "conflict": false,
         "verification": {
           "checks": [
@@ -339,9 +1042,10 @@
         },
         "inference": {
           "provider": "Google Gemini API",
+          "offline": false,
           "model": "gemma-4-26b-a4b-it",
           "modelVersion": "gemma-4-26b-a4b-it",
-          "milliseconds": 6998,
+          "milliseconds": 7606,
           "realInference": true,
           "validation": "Schema, field limits, step index, and exact student quote validated"
         }
@@ -359,17 +1063,17 @@
           "firstIssue": {
             "step": 2,
             "quote": "  return a + b;",
-            "misconception": "The student assumes the '+' operator will automatically coerce string inputs into numbers for arithmetic, whereas in JavaScript, '+' acts as a concatenation operator when one or both operands are strings."
+            "misconception": "The student assumes the '+' operator will automatically coerce string-type numbers into numeric types for addition, whereas in JavaScript, '+' acts as a concatenation operator if either operand is a string."
           },
           "hints": [
-            "Recall how JavaScript handles the '+' operator when it encounters string types versus number types.",
-            "Try using a built-in function to explicitly convert the inputs 'a' and 'b' into numbers before performing the addition."
+            "In JavaScript, the '+' operator is overloaded: it performs arithmetic addition for numbers but string concatenation if one or both operands are strings.",
+            "Try using `typeof` to check the types of `a` and `b` before the return statement, or look for functions that explicitly convert strings to numbers."
           ],
           "correction": "return Number(a) + Number(b);",
           "followUp": {
-            "question": "What would happen if you called `add(2, \"3\")` with your current code, and how does that differ from `add(\"2\", \"3\")`?",
-            "answer": "add(2, \"3\") would return \"23\".",
-            "explanation": "In JavaScript, if either operand of the '+' operator is a string, the other operand is coerced into a string and the two are concatenated. Even if one is a number, the presence of one string triggers concatenation."
+            "question": "How would you modify the function to ensure it returns 0 if the inputs cannot be converted to valid numbers?",
+            "answer": "return Number(a) + Number(b) || 0;",
+            "explanation": "Using the logical OR operator with 0 provides a fallback if the result of the addition is NaN (Not a Number), which occurs when conversion fails."
           },
           "uncertainty": "Static model review only; code was not executed."
         },
@@ -406,9 +1110,10 @@
         },
         "inference": {
           "provider": "Google Gemini API",
+          "offline": false,
           "model": "gemma-4-26b-a4b-it",
           "modelVersion": "gemma-4-26b-a4b-it",
-          "milliseconds": 8127,
+          "milliseconds": 8046,
           "realInference": true,
           "validation": "Schema, field limits, step index, and exact student quote validated"
         }

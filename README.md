@@ -9,8 +9,8 @@ Students paste a question and their own steps. Margin identifies the earliest pr
 Requires **Node.js 22 or newer**, internet access, and a Google AI Studio API key with access to Gemma 4. There are **no third-party runtime packages** and no dependency installation or build step.
 
 ```sh
-git clone <this-public-repository-url>
-cd <repository-directory>
+git clone https://github.com/rochismarts189-dot/Margin.git
+cd Margin
 cp .env.example .env
 ```
 
@@ -29,17 +29,17 @@ If your npm installation works, `npm start` and `npm test` are equivalent conven
 The app source and browser assets run locally. The default Google provider still needs internet. For fully offline inference, install [Ollama](https://ollama.com), download an official [Gemma 4 model](https://ollama.com/library/gemma4) once, and keep Ollama running:
 
 ```sh
-ollama pull gemma4:e2b
+ollama pull gemma4:e2b-it-q4_K_M
 ```
 
 Set these values in `.env`:
 
 ```ini
 MODEL_PROVIDER=ollama
-OLLAMA_MODEL=gemma4:e2b
+OLLAMA_MODEL=gemma4:e2b-it-q4_K_M
 ```
 
-Then run `node server.mjs`. No Gemini key is required in local mode. All inference requests go exclusively to `127.0.0.1:11434`, never a remote model or automatic cloud fallback. The UI labels local inference and changes its data notice. A missing model returns a download instruction rather than fabricated results. Supported local tags are `gemma4:e2b`, `gemma4:e4b`, `gemma4:12b`, `gemma4:26b` and `gemma4:31b`; cloud tags and Gemma 3 are deliberately rejected. Model family metadata is checked.
+Then run `node server.mjs`. No Gemini key is required in local mode. All inference requests go exclusively to `127.0.0.1:11434`, never a remote model or automatic cloud fallback. The UI labels local inference and changes its data notice. A missing model returns a download instruction rather than fabricated results. Supported local tags are `gemma4:e2b-it-q4_K_M`, `gemma4:e4b`, `gemma4:12b`, `gemma4:26b` and `gemma4:31b`; cloud tags and Gemma 3 are deliberately rejected. Model family metadata is checked.
 
 The E2B download is roughly 4.6 GB (size may change) and requires additional RAM for runtime/context. Latency and accuracy differ from the hosted 26B model. Adapter tests are not proof of local model performance: see the verification report for whether local Gemma inference was actually tested on this machine. The API-specific age/data terms apply to hosted mode; downloaded weights have their separate Apache 2.0 license.
 

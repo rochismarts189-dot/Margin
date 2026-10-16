@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-10-16T06:13:02.685Z",
+  "model": "gemma-4-26b-a4b-it",
+  "realInference": true,
+  "cases": [
+    {
+      "id": "incomplete",
+      "expectedStatus": "incomplete",
+      "expectedStep": null,
+      "passed": true,
+      "result": {
+        "feedback": {
+          "status": "incomplete",
+          "summary": "The student has correctly identified the given parameters and the appropriate physical relationship, but has not yet performed the final calculation to provide a numerical answer as requested.",
+          "firstIssue": null,
+          "hints": [
+            "Review the relationship between mass, acceleration, and net force established in your third step.",
+            "Perform the arithmetic substitution of the given values into your formula to find the magnitude of the force."
+          ],
+          "correction": "Substitute m = 3 kg and a = 4 m/s² into the equation F = m * a to calculate the final value in Newtons (N).",
+          "followUp": {
+            "question": "If the net force on the same 3 kg object were doubled, what would be the new acceleration?",
+            "answer": "8 m/s²",
+            "explanation": "Since F = ma, acceleration is directly proportional to the net force when mass is constant. Doubling the force doubles the acceleration (2 * 4 m/s² = 8 m/s²)."
+          },
+          "uncertainty": "The work is logically sound but lacks the final numerical result required by the question."
+        },
+        "status": "incomplete",
+        "conflict": false,
+        "verification": {
+          "checks": [
+            {
+              "step": 1,
+              "quote": "m = 3 kg",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 2,
+              "quote": "a = 4 m/s²",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 3,
+              "quote": "F = m*a",
+              "status": "pass",
+              "kind": "physics",
+              "detail": "Evaluated equalities agree within 0.2% rounding tolerance. This does not verify the whole solution."
+            },
+            {
+              "step": 4,
+              "quote": "I have not substituted the numbers or found the final force yet.",
+              "status": "unverified",
+              "detail": "No complete supported equation on this line."
+            }
+          ],
+          "references": [
+            {
+              "quantity": "F",
+              "value": 12,
+              "unit": "N",
+              "rule": "F_net = m*a (inertial frame, constant mass)",
+              "source": "Confirmed question data and selected assumptions"
+            }
+          ],
+          "contradictions": [],
+          "firstFailure": null,
+          "limitation": "Only supported explicit equations and confirmed SI inputs are checked. Unchecked lines, assumptions, completeness, and conceptual feedback remain model judgments. No general symbolic proof or natural-language fact verification."
+        },
+        "inference": {
+          "provider": "Google Gemini API",
+          "offline": false,
+          "model": "gemma-4-26b-a4b-it",
+          "modelVersion": "gemma-4-26b-a4b-it",
+          "milliseconds": 6821,
+          "realInference": true,
+          "validation": "Schema, field limits, step index, and exact student quote validated"
+        }
+      }
+    }
+  ]
+}

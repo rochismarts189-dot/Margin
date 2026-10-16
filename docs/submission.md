@@ -12,11 +12,11 @@ The MVP supports introductory engineering Physics and Maths (arithmetic and line
 
 **Challenges:** Best Use of Gemma 4; Best Open-Source AI Project.
 
-**Repository:** Pending publication. Do not claim a public repo until verified.
+**Repository:** https://github.com/rochismarts189-dot/Margin (published; MIT application code).
 
 **Demo:** Local http://127.0.0.1:3000; accessible only on the demo laptop. Follow the README to reproduce.
 
-**Validation:** 27 automated checks passed. Live inference evidence must be filled from actual evaluation results.
+**Validation:** 35 automated checks passed. All 15 hosted smoke-test examples passed across a full run and a targeted retry; the full run had one provider service error. See the verification report for details. Offline inference verification is in progress.
 
 ## 90-second demo
 
